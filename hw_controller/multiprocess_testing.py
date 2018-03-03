@@ -14,7 +14,7 @@ def testing():
             action = raw_input('Action?: ')
             if action == "open":
                 t = raw_input('Time: ')
-                if t is None:
+                if t == '':
                     t = '0'
                 pool.close()
                 pool.terminate()
@@ -22,7 +22,7 @@ def testing():
                 pool.apply_async(hw_controller.blind_open, (int(t),))
             elif action == "close":
                 t = raw_input('Time: ')
-                if t is None:
+                if t == '':
                     t = '0'
                 pool.close()
                 pool.terminate()
