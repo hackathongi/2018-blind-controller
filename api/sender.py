@@ -10,10 +10,30 @@ ORION_SERVER_PRIVATE = '192.168.4.230'
 ORION_SERVER_PUBLIC = '84.89.60.4'
 ORION_PORT = 80
 BASE_URL = 'http://{server}:{port}/'
+MY_UNIQUE_ID = 'persiana'
+MY_TYPE = 'blind_controller'
 
 
-def registerEntity():
-    logger.info('Requesting Entity Register')
+def updateSubscription(element, private=True):
+    logger.info('Updating Server Info')
+    server = ORION_SERVER_PRIVATE if private else ORION_SERVER_PUBLIC
+    url = BASE_URL.format(server=server, port=ORION_PORT) + '/v2/entities/'
+    url += MY_UNIQUE_ID + '/attrs'
+    json_vals = {
+        'state': (
+            'opening' if element.engine_state else (
+                'closing' if element.engine_state == -1 else 'stopped'
+            )
+        ),
+        'percentage': element.rotation_point/element.max,
+        'mode': 'manual'
+    }
+    logger.debug(json_vals)
+    response = requests.post(url=url, json=dumps(json_vals))
+    if response.status_code >= 400:
+        logger.error('Failed to update status')
+        logger.error(response.content)
+        return False
     return True
 
 
