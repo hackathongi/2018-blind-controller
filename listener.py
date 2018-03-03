@@ -13,21 +13,21 @@ app = flask.Flask(__name__)
 def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
-    core.blind_up(t=12)
+    house_core.blind_up(t=12)
 
 
 @app.route('/parar', methods=['POST', 'OPTIONS'])
 def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
-    core.blind_stop()
+    house_core.blind_stop()
 
 
 @app.route('/baixar', methods=['POST', 'OPTIONS'])
 def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
-    core.blind_down(t=10)
+    house_core.blind_down(t=10)
 
 
 @click.command()
