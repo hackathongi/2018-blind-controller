@@ -1,6 +1,8 @@
+from core.core import Core
 import logging
 import click
 import flask
+
 
 app = flask.Flask(__name__)
 
@@ -18,6 +20,8 @@ def startup(verbosity, port, interface):
     logging.basicConfig(format='[%(asctime)s]%(name)s: %(message)s',
                         datefmt='%Y/%m/%d-%H:%M:%S',
                         level=logging.INFO if verbosity else logging.WARNING)
+    global house_core
+    house_core = Core()
     app.run(host=interface, port=port)
 
 
