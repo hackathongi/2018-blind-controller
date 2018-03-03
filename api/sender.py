@@ -39,7 +39,8 @@ def registerSubscriptions(private=False):
                 "url": "http://192.168.4.13"  # Persianes
             },
             "attrs": [
-                ""
+                "fotoresistencia",
+                "temperatura"
             ]
         },
         "expires": "2040-01-01T14:00:00.00Z",
@@ -49,8 +50,7 @@ def registerSubscriptions(private=False):
     if response.status_code >= 400:
         logger.error('Failed to subscribe')
         logger.error(response.content)
-        return False
-    return True
+    return response.status_code
 
 
 def updateServerInfo(element, private=True):
