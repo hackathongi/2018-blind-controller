@@ -1,6 +1,6 @@
 import click
 import RPi.GPIO as GPIO
-
+import time
 
 @click.command()
 def blind_open():
@@ -10,6 +10,8 @@ def blind_open():
     pwm = GPIO.PWM(11, 50)
     pwm.start(5)
     pwm.ChangeDutyCycle(2)
+    time.sleep(5)
+    GPIO.cleanup()
 
 
 if __name__ == '__main__':
