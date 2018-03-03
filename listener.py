@@ -29,9 +29,10 @@ def startup(verbosity, port, interface):
     )
     global house_core
     house_core = Core()
-    if sender.getServerVersion() != 200:
+    if sender.getServerVersion() >= 400:
         exit(-1)
-    # sender.registerEntity()
+    if sender.registerSubscriptions() >= 400:
+        exit(-1)
     app.run(host=interface, port=port)
 
 
