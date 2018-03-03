@@ -24,6 +24,10 @@ def subscription():
                 house_core.blind_up()
             elif action == 'para':
                 house_core.blind_stop()
+            else:
+                return 'ERROR, ACTION NOT DEFINED', 500
+        else:
+            return 'ERROR, SUBSCRIPTION NOT ALLOWED', 500
     return 'OK', 200
 
 
