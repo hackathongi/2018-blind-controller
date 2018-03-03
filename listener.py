@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from core.core import Core
-from flask import request
 from api import sender
 import logging
 import click
@@ -14,18 +13,21 @@ app = flask.Flask(__name__)
 def default():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
+    core.blind_up(t=12)
 
 
 @app.route('/parar')
 def default():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
+    core.blind_stop()
 
 
 @app.route('/baixar')
 def default():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
+    core.blind_down(t=10)
 
 
 @click.command()
