@@ -15,15 +15,18 @@ def testing():
             if action == "open":
                 t = raw_input('Time: ')
                 pool.close()
+                pool.terminate()
                 pool = Pool(processes=1)
                 pool.apply_async(hw_controller.blind_open, (int(t),))
             elif action == "close":
                 t = raw_input('Time: ')
                 pool.close()
+                pool.terminate()
                 pool = Pool(processes=1)
                 pool.apply_async(hw_controller.blind_close, (int(t),))
             elif action == "purge":
                 pool.close()
+                pool.terminate()
                 pool = Pool(processes=1)
             else:
                 print(action+" is not a valid option...")
