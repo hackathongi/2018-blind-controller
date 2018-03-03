@@ -2,6 +2,7 @@
 from core.core import Core
 from flask import request
 from api import sender
+from json import loads
 import logging
 import click
 import flask
@@ -12,7 +13,7 @@ app = flask.Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def subscription():
-    data = request.data
+    data = loads(request.data)
     for sub in data['data']:
         if sub['id'] == 'sensors':
             house_core.update_sensors(light_lvl=sub['fotoresistencia']['value'])
