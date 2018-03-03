@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from core.core import Core
 from flask import request
-from api import parser, sender
+from api import sender
 import logging
 import click
 import flask
@@ -10,10 +10,22 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route('/')
+@app.route('/pujar')
 def default():
-    parser.parse_request(request.data)
-    print('OK')
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Pujant')
+
+
+@app.route('/parar')
+def default():
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Parant')
+
+
+@app.route('/baixar')
+def default():
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Baixant')
 
 
 @click.command()
