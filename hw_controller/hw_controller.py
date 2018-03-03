@@ -1,11 +1,36 @@
-import click
+import RPi.GPIO as GPIO
+import time
 
 
-@click.command()
-@click.option('--elem_id', type=int, help="Objective  HW element id")
-def main (elem_id):
-    print elem_id
+def blind_open(t=0):
+    print("Opening blind")
+    try:
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(11, GPIO.OUT)
+        pwm = GPIO.PWM(11, 50)
+        pwm.start(5)
+        pwm.ChangeDutyCycle(2)
+        if t == 0:
+            while True:
+                pass
+        else:
+            time.sleep(t)
+    finally:
+        GPIO.cleanup()
 
 
-if __name__ == '__main__':
-    main()
+def blind_close(t=0):
+    print("Closing blind")
+    try:
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(11, GPIO.OUT)
+        pwm = GPIO.PWM(11, 50)
+        pwm.start(5)
+        pwm.ChangeDutyCycle(12)
+        if t == 0:
+            while True:
+                pass
+        else:
+            time.sleep(t)
+    finally:
+        GPIO.cleanup()
