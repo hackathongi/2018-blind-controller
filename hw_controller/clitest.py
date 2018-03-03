@@ -10,7 +10,7 @@ def testing_mode():
     try:
         while True:
             i = GPIO.input(13)
-            print("Sensor value: "+i)
+            print("Sensor value: "+str(i))
             time.sleep(3)
     except KeyboardInterrupt:
         GPIO.cleanup()
