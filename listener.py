@@ -14,6 +14,7 @@ def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
     house_core.blind_up(t=12)
+    return 200, 'OK'
 
 
 @app.route('/parar', methods=['POST', 'OPTIONS'])
@@ -21,6 +22,7 @@ def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
     house_core.blind_stop()
+    return 200, 'OK'
 
 
 @app.route('/baixar', methods=['POST', 'OPTIONS'])
@@ -28,6 +30,7 @@ def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
     house_core.blind_down(t=10)
+    return 200, 'OK'
 
 
 @click.command()
