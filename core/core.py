@@ -5,6 +5,11 @@ from multiprocessing import Pool
 
 
 class Core(object):
+    MIN_LUX = 400
+    MIN_TMP = 20
+
+    MAX_LUX = 200
+    MAX_TMP = 30
 
     def __init__(self):
         self.manager = ElementManager()
@@ -27,5 +32,17 @@ class Core(object):
         self.pool.terminate()
         self.pool = Pool(processes=1)
 
+    def update_sensors(self, **kwargs):
+        '''call determinate function depending of environement status'''
+        self.light_lvl = kwargs['light_lvl']
+
+        # Check Extream vals
+        if self.light_lvl in range(self.MIN_LUX, self.MAX_LUX):
+            self.blind_up()
+        elif self.light_lvl < self.MIN_LUX:
+            self.blind_down()
+        elif self.light_lvl > self.MAX_LUX:
+            self.blind_up()
+        # TODO what to do with temperature?
 
 
