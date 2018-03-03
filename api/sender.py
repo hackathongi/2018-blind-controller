@@ -30,7 +30,8 @@ def registerSubscriptions(private=False):
             ],
             "condition": {
                 "attrs": [
-                    "estat"
+                    "fotoresistencia",
+                    "temperatura"
                 ]
             }
         },
@@ -46,7 +47,37 @@ def registerSubscriptions(private=False):
         "expires": "2040-01-01T14:00:00.00Z",
         "throttling": 1
     }
+    json_vals2 = {
+        "description": "Subscripció de luminositat per activar la persiana",
+        "subject": {
+            "entities": [
+                {
+                    "id": MY_UNIQUE_ID,
+                    "type": MY_TYPE
+                }
+            ],
+            "condition": {
+                "attrs": [
+                    "action"
+                ]
+            }
+        },
+        "notification": {
+            "http": {
+                "url": "http://192.168.4.13"  # Persianes
+            },
+            "attrs": [
+                "action"
+            ]
+        },
+        "expires": "2040-01-01T14:00:00.00Z",
+        "throttling": 1
+    }
     response = requests.post(url=url, json=json_vals, headers=HEADERS)
+    if response.status_code >= 400:
+        logger.error('Failed to subscribe')
+        logger.error(response.content)
+    response = requests.post(url=url, json=json_vals2, headers=HEADERS)
     if response.status_code >= 400:
         logger.error('Failed to subscribe')
         logger.error(response.content)
