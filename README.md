@@ -5,6 +5,12 @@ A Hackathon project to control the blinders of a House
 IP: 192.168.4.13
 PORT: 80
 
+# API
+
+- `/pujar`: Puja la persiana
+- `/parar`: Parar la persiana
+- `/baixar`: Baixar la persiana
+
 ## Vars
 
 - `state`: defines de current state
