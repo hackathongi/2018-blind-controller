@@ -5,7 +5,7 @@ import time
 
 @click.command()
 def blind_close():
-    print("Closing blind")
+    print("Start closing blind")
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
@@ -15,6 +15,7 @@ def blind_close():
         while True:
             pass
     finally:
+        print("Stop closing blind")
         GPIO.cleanup()
 
 
