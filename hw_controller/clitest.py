@@ -5,8 +5,8 @@ import time
 
 @click.command()
 def testing_mode():
+    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(13, GPIO.IN)
-    GPIO.setup(15, GPIO.IN)
     try:
         while True:
             i = GPIO.input(13)
