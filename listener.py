@@ -10,21 +10,21 @@ app = flask.Flask(__name__)
 
 
 @app.route('/pujar')
-def default():
+def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
     core.blind_up(t=12)
 
 
 @app.route('/parar')
-def default():
+def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
     core.blind_stop()
 
 
 @app.route('/baixar')
-def default():
+def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
     core.blind_down(t=10)
