@@ -10,15 +10,20 @@ def testing():
     pool = Pool(processes=1)
     try:
         while True:
-            action = raw_input('So?: ')
+            action = raw_input('Action?: ')
             if action == "open":
+                t = raw_input('Time: ')
                 pool.close()
                 pool = Pool(processes=1)
-                pool.apply_async(hw_controller.blind_open())
+                pool.apply_async(hw_controller.blind_open, (int(t),))
             elif action == "close":
+                t = raw_input('Time: ')
                 pool.close()
                 pool = Pool(processes=1)
-                pool.apply_async(hw_controller.blind_close())
+                pool.apply_async(hw_controller.blind_close, (int(t),))
+            elif action == "purge":
+                pool.close()
+                pool = Pool(processes=1)
             else:
                 print(action+" is not a valid option...")
     except KeyboardInterrupt:
