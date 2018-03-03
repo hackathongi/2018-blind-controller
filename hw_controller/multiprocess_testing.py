@@ -18,7 +18,7 @@ def testing():
             elif action == "close":
                 pool.close()
                 pool = Pool(processes=1)
-                pool.apply_async(hw_controller.blind_open())
+                pool.apply_async(hw_controller.blind_close())
             else:
                 print(action+" is not a valid option...")
     except KeyboardInterrupt:
