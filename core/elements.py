@@ -5,6 +5,10 @@ class ElementManager(object):
     def __init__(self, elements_list=False):
         self.elements = elements_list or []
 
+    @property
+    def element_type(self):
+        return self.elements[0].e_type if self.elements else False
+
 
 class Element(object):
 
@@ -28,7 +32,7 @@ class Element(object):
             self.rotation_point = init_rotation
             self.engine_state = eng_state
             self.max = max_limit
-            self.type = obj_type
+            self.e_type = obj_type
 
 
 
