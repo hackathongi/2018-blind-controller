@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
 from core.core import Core
+from flask import request
+from api import parser, sender
 import logging
 import click
 import flask
@@ -9,6 +12,7 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def default():
+    parser.parse_request(request.data)
     print('OK')
 
 
@@ -22,6 +26,7 @@ def startup(verbosity, port, interface):
                         level=logging.INFO if verbosity else logging.WARNING)
     global house_core
     house_core = Core()
+    sender.registerEntity()
     app.run(host=interface, port=port)
 
 
