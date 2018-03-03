@@ -7,15 +7,13 @@ def blind_open(t=0):
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
+        GPIO.setup(13, GPIO.IN)
         GPIO.setwarnings(False)
         pwm = GPIO.PWM(11, 50)
         pwm.start(5)
         pwm.ChangeDutyCycle(2)
-        if t == 0:
-            while True:
-                pass
-        else:
-            time.sleep(t)
+        while GPIO.input(13) != 0:
+            pass
     finally:
         print("Stop opening blind")
         GPIO.cleanup()
@@ -26,15 +24,13 @@ def blind_close(t=0):
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
+        GPIO.setup(15, GPIO.IN)
         GPIO.setwarnings(False)
         pwm = GPIO.PWM(11, 50)
         pwm.start(5)
         pwm.ChangeDutyCycle(12)
-        if t == 0:
-            while True:
-                pass
-        else:
-            time.sleep(t)
+        while GPIO.input(15) != 1:
+            pass
     finally:
         print("Stop closing blind")
         GPIO.cleanup()
