@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import requests
+from json import dumps, loads
 
 
 logger = logging.getLogger('RequestSender')
@@ -16,16 +17,16 @@ def registerEntity():
     return True
 
 
-def getServerVersion(private=False):
+def getServerVersion(private=True):
     logger.info('Requesting Server Version')
     server = ORION_SERVER_PRIVATE if private else ORION_SERVER_PUBLIC
-    url = BASE_URL.format(server=server, port=ORION_PORT)
+    url = BASE_URL.format(server=server, port=ORION_PORT) + 'version'
     response = requests.get(url)
     if response.status_code != 200:
         logger.error('Failed to Get Server Version!')
         logger.error(str(response.content))
         return response.status_code
-    data = response.content['orion']
+    data = loads(response.content)['orion']
     logger.info('Version: {}'.format(data['version']))
     logger.info('Uptime: {}'.format(data['uptime']))
     return response.status_code
