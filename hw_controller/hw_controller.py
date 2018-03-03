@@ -3,7 +3,7 @@ import time
 
 
 def blind_open(t=0):
-    print("Opening blind")
+    print("Start opening blind")
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
@@ -16,11 +16,12 @@ def blind_open(t=0):
         else:
             time.sleep(t)
     finally:
+        print("Stop opening blind")
         GPIO.cleanup()
 
 
 def blind_close(t=0):
-    print("Closing blind")
+    print("Start closing blind")
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
@@ -33,4 +34,5 @@ def blind_close(t=0):
         else:
             time.sleep(t)
     finally:
+        print("Stop closing blind")
         GPIO.cleanup()
