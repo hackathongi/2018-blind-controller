@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.core import Core
+from flask import request
 from api import sender
 import logging
 import click
@@ -9,7 +10,13 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route('/pujar', methods=['POST', 'OPTIONS'])
+@app.route('/', methods=['POST'])
+def subscription():
+    print request.data
+    return 'OK', 200
+
+
+@app.route('/pujar', methods=['POST'])
 def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
@@ -17,7 +24,7 @@ def pujar_persiana():
     return 'OK', 200
 
 
-@app.route('/parar', methods=['POST', 'OPTIONS'])
+@app.route('/parar', methods=['POST'])
 def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
@@ -25,7 +32,7 @@ def parar_persiana():
     return 'OK', 200
 
 
-@app.route('/baixar', methods=['POST', 'OPTIONS'])
+@app.route('/baixar', methods=['POST'])
 def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
