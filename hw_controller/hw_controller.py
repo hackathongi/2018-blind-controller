@@ -31,10 +31,8 @@ def blind_close(t=0):
         pwm.ChangeDutyCycle(12)
         print("Val: ")
         print(GPIO.input(15))
-        while GPIO.input(15) != 0:
+        while int(GPIO.input(15)) != 1:
             pass
-    except Exception, e:
-        print("ERRRRRROOOR: "+e)
     finally:
         print()
         GPIO.cleanup()
