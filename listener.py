@@ -9,21 +9,21 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route('/pujar')
+@app.route('/pujar', methods=['POST', 'OPTIONS'])
 def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
     core.blind_up(t=12)
 
 
-@app.route('/parar')
+@app.route('/parar', methods=['POST', 'OPTIONS'])
 def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
     core.blind_stop()
 
 
-@app.route('/baixar')
+@app.route('/baixar', methods=['POST', 'OPTIONS'])
 def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
