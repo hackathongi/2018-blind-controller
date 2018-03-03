@@ -1,5 +1,5 @@
 import click
-import multiprocessing import Pool
+from multiprocessing import Pool
 import hw_controller
 
 
