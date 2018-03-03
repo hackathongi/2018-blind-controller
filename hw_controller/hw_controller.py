@@ -7,6 +7,7 @@ def blind_open(t=0):
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
+        GPIO.setwarnings(False)
         pwm = GPIO.PWM(11, 50)
         pwm.start(5)
         pwm.ChangeDutyCycle(2)
@@ -25,6 +26,7 @@ def blind_close(t=0):
     try:
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(11, GPIO.OUT)
+        GPIO.setwarnings(False)
         pwm = GPIO.PWM(11, 50)
         pwm.start(5)
         pwm.ChangeDutyCycle(12)
