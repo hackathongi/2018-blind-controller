@@ -27,4 +27,4 @@ def open_blind(elem_id):
 
 
 if __name__ == '__main__':
-    main()
+    open_blind()
