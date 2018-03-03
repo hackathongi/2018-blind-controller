@@ -12,7 +12,18 @@ app = flask.Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def subscription():
-    print request.data
+    data = request.data
+    for sub in data['data']:
+        if sub['id'] == 'sensors':
+            house_core.update_sensors(light_lvl=sub['fotoresistencia']['value'])
+        elif sub['id'] == sender.MY_UNIQUE_ID:
+            action = sub['action']['value']
+            if action == 'baixa':
+                house_core.blind_down()
+            elif action == 'puja':
+                house_core.blind_up()
+            elif action == 'para':
+                house_core.blind_stop()
     return 'OK', 200
 
 
