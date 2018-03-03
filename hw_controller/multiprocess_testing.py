@@ -14,12 +14,16 @@ def testing():
             action = raw_input('Action?: ')
             if action == "open":
                 t = raw_input('Time: ')
+                if t is None:
+                    t = 0
                 pool.close()
                 pool.terminate()
                 pool = Pool(processes=1)
                 pool.apply_async(hw_controller.blind_open, (int(t),))
             elif action == "close":
                 t = raw_input('Time: ')
+                if t is None:
+                    t = 0
                 pool.close()
                 pool.terminate()
                 pool = Pool(processes=1)
