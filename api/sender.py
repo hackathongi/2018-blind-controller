@@ -53,7 +53,7 @@ def registerSubscriptions(private=False):
     return True
 
 
-def updateSubscription(element, private=True):
+def updateServerInfo(element, private=True):
     logger.info('Updating Server Info')
     server = ORION_SERVER_PRIVATE if private else ORION_SERVER_PUBLIC
     url = BASE_URL.format(server=server, port=ORION_PORT) + 'v2/entities/'
