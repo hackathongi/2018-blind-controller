@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from elements import ElementManager
-
+from hw_controller.hw_controller import blind_open, blind_close
 class Core(object):
 
     MIN_LUX = 400
@@ -12,9 +12,6 @@ class Core(object):
     def __init__(self):
         self.temperature_lvl = 0
         self.light_lvl = 0
-        #self.manager = ElementManager()
-
-
 
     def action_selector(self):
         '''call determinate function depending of environement status'''
@@ -23,6 +20,11 @@ class Core(object):
 
         # Check Extream vals
         if current_light in range(self.MIN_LUX, self.MAX_LUX):
+            blind_open()
+        elif current_light < self.MIN_LUX:
+            blind_close()
+        elif current_light > self.MAX_LUX:
+            blind_open()
+        # TODO what to do with temperature?
 
-
-    def write(self):
+    
