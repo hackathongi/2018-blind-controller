@@ -37,12 +37,10 @@ class Core(object):
         self.light_lvl = kwargs['light_lvl']
 
         # Check Extream vals
-        if self.light_lvl in range(self.MIN_LUX, self.MAX_LUX):
-            self.blind_up()
-        elif self.light_lvl < self.MIN_LUX:
-            self.blind_down()
-        elif self.light_lvl > self.MAX_LUX:
-            self.blind_up()
+        if self.light_lvl >= self.MIN_LUX:
+            self.blind_up(t=1)
+        else:
+            self.blind_down(t=1)
         # TODO what to do with temperature?
 
 

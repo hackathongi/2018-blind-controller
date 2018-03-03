@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from core.core import Core
+from flask import request
 from api import sender
+from json import loads
 import logging
 import click
 import flask
@@ -9,7 +11,28 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route('/pujar', methods=['POST', 'OPTIONS'])
+@app.route('/', methods=['POST'])
+def subscription():
+    data = loads(request.data)
+    for sub in data['data']:
+        if sub['id'] == 'sensors':
+            house_core.update_sensors(light_lvl=sub['fotoresistencia']['value'])
+        elif sub['id'] == sender.MY_UNIQUE_ID:
+            action = sub['action']['value']
+            if action == 'baixa':
+                house_core.blind_down()
+            elif action == 'puja':
+                house_core.blind_up()
+            elif action == 'para':
+                house_core.blind_stop()
+            else:
+                return 'ERROR, ACTION NOT DEFINED', 500
+        else:
+            return 'ERROR, SUBSCRIPTION NOT ALLOWED', 500
+    return 'OK', 200
+
+
+@app.route('/pujar', methods=['POST'])
 def pujar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Pujant')
@@ -17,7 +40,7 @@ def pujar_persiana():
     return 'OK', 200
 
 
-@app.route('/parar', methods=['POST', 'OPTIONS'])
+@app.route('/parar', methods=['POST'])
 def parar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Parant')
@@ -25,7 +48,7 @@ def parar_persiana():
     return 'OK', 200
 
 
-@app.route('/baixar', methods=['POST', 'OPTIONS'])
+@app.route('/baixar', methods=['POST'])
 def baixar_persiana():
     logger = logging.getLogger('Flaskapp')
     logger.info('Baixant')
