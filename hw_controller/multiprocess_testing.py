@@ -15,7 +15,7 @@ def testing():
             if action == "open":
                 t = raw_input('Time: ')
                 if t is None:
-                    t = 0
+                    t = '0'
                 pool.close()
                 pool.terminate()
                 pool = Pool(processes=1)
@@ -23,7 +23,7 @@ def testing():
             elif action == "close":
                 t = raw_input('Time: ')
                 if t is None:
-                    t = 0
+                    t = '0'
                 pool.close()
                 pool.terminate()
                 pool = Pool(processes=1)
