@@ -4,7 +4,8 @@ import time
 
 @click.command()
 @click.option('--elem_id', type=int, help="Objective  HW element id")
-def open_blind(elem_id):
+@click.option('--dir', type=int, help="Objective  HW element id")
+def open_blind(elem_id,dir):
 
     if (elem_id == 1):
         print("Servo Mode!")
@@ -14,8 +15,10 @@ def open_blind(elem_id):
         pwm.start(5)
         try:
             while True:  # iniciamos un loop infinito
-                pwm.ChangeDutyCycle(7.5)
-                pwm.ChangeDutyCycle(10)
+                if dir == 1:
+                    pwm.ChangeDutyCycle(2)
+                elif dir == 2:
+                    pwm.ChangeDutyCycle(12)
         except KeyboardInterrupt:  # Si el usuario pulsa CONTROL+C entonces...
             GPIO.cleanup()  # Limpiamos los pines GPIO de la Raspberry y cerramos el script
     elif (elem_id == 2):
