@@ -1,6 +1,7 @@
 import click
 from multiprocessing import Pool
 import hw_controller
+import time
 
 
 
@@ -26,6 +27,7 @@ def testing():
                 pool = Pool(processes=1)
             else:
                 print(action+" is not a valid option...")
+            time.sleep(0.5)
     except KeyboardInterrupt:
         print("End of the execution...")
 
