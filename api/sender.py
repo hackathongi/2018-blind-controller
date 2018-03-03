@@ -17,19 +17,30 @@ MY_TYPE = 'blind_controller'
 def updateSubscription(element, private=True):
     logger.info('Updating Server Info')
     server = ORION_SERVER_PRIVATE if private else ORION_SERVER_PUBLIC
-    url = BASE_URL.format(server=server, port=ORION_PORT) + '/v2/entities/'
+    url = BASE_URL.format(server=server, port=ORION_PORT) + 'v2/entities/'
     url += MY_UNIQUE_ID + '/attrs'
     json_vals = {
-        'state': (
-            'opening' if element.engine_state else (
-                'closing' if element.engine_state == -1 else 'stopped'
-            )
-        ),
-        'percentage': element.rotation_point/element.max,
-        'mode': 'manual'
+        'state': {
+            'value': (
+                'opening' if element.engine_state else (
+                    'closing' if element.engine_state == -1 else 'stopped'
+                )
+            ),
+            'type': 'String'
+        },
+        'percentage': {
+            'value': str(element.rotation_point/element.max),
+            'type': 'String'
+        },
+        'mode': {
+            'value': 'manual',
+            'type': 'String'
+        },
     }
-    logger.debug(json_vals)
-    response = requests.post(url=url, json=dumps(json_vals))
+    response = requests.post(
+        url=url, json=json_vals,
+        headers={'Content-Type': 'application/json'}
+    )
     if response.status_code >= 400:
         logger.error('Failed to update status')
         logger.error(response.content)
