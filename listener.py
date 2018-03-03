@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.core import Core
-from flask import request
-from api import parser, sender
+from api import sender
 import logging
 import click
 import flask
@@ -10,10 +9,28 @@ import flask
 app = flask.Flask(__name__)
 
 
-@app.route('/')
-def default():
-    parser.parse_request(request.data)
-    print('OK')
+@app.route('/pujar', methods=['POST', 'OPTIONS'])
+def pujar_persiana():
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Pujant')
+    house_core.blind_up(t=12)
+    return 'OK', 200
+
+
+@app.route('/parar', methods=['POST', 'OPTIONS'])
+def parar_persiana():
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Parant')
+    house_core.blind_stop()
+    return 'OK', 200
+
+
+@app.route('/baixar', methods=['POST', 'OPTIONS'])
+def baixar_persiana():
+    logger = logging.getLogger('Flaskapp')
+    logger.info('Baixant')
+    house_core.blind_down(t=10)
+    return 'OK', 200
 
 
 @click.command()
