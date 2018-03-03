@@ -29,6 +29,8 @@ def blind_close(t=0):
         pwm = GPIO.PWM(11, 50)
         pwm.start(5)
         pwm.ChangeDutyCycle(12)
+        print("Val: ")
+        print(GPIO.input(15))
         while GPIO.input(15) != 1:
             pass
     finally:
